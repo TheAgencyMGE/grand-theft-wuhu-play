@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grand Theft Wuhu</title>
+  <script type="module" crossorigin src="./assets/index-52ScLAov.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-CgyXndEl.css">
+</head>
+<body>
+  <div id="app"></div>
+
+  <!-- Loading -->
+  <div id="loading" class="screen">
+    <div class="load-card">
+      <div class="gtw-logo"><span class="l1">GRAND</span><span class="l2">THEFT</span><span class="l3">WUHU</span></div>
+      <div class="bar"><div id="load-fill"></div></div>
+      <div id="load-text">Loading island…</div>
+      <div class="load-tip" id="load-tip">Tip: hold Tab for the weapon wheel.</div>
+    </div>
+  </div>
+
+  <!-- 3D main menu -->
+  <div id="menu" class="hidden">
+    <div id="menu-fade"></div>
+    <div class="menu-vignette"></div>
+    <div class="menu-left">
+      <div class="gtw-logo big"><span class="l1">GRAND</span><span class="l2">THEFT</span><span class="l3">WUHU</span></div>
+      <div class="menu-tag">WUHU ISLAND · STORY EDITION</div>
+      <div id="menu-crumb"></div>
+      <div id="menu-items"></div>
+      <div class="menu-foot">↑ ↓ select · Enter confirm · Esc back</div>
+    </div>
+    <div class="menu-right" id="menu-panel"></div>
+  </div>
+
+  <!-- Mii Maker panel (shown from the menu) -->
+  <div id="title" class="hidden">
+    <div class="title-panel">
+      <div class="mp-h">MII MAKER</div>
+      <p class="sub">Your Mii stars in Story Mode and Free Roam.</p>
+      <div class="editor" id="editor"></div>
+    </div>
+  </div>
+
+  <!-- Cutscenes -->
+  <div id="cine" class="hidden">
+    <div class="bar-top"></div><div class="bar-bot"></div>
+    <div id="cine-box"><div id="cine-name"></div><div id="cine-text"></div></div>
+    <div class="cine-skip">Enter / click: next line · Esc: skip scene</div>
+  </div>
+  <div id="cine-fade"></div>
+  <div id="chapter-card" class="hidden"><div id="chapter-n"></div><div id="chapter-name"></div><div id="chapter-sub"></div></div>
+  <div id="retry" class="hidden"><b>MISSION FAILED</b><span>Press <kbd>Enter</kbd> to retry</span></div>
+  <div id="credits" class="hidden"><div class="roll">
+    <div class="gtw-logo"><span class="l1">GRAND</span><span class="l2">THEFT</span><span class="l3">WUHU</span></div>
+    <h3>STARRING</h3><p>Your Mii</p><p>Lucía · Takumi · Sakura · Hiromasa</p><p>Matt, the Swordplay Champion</p><p>Ryan · Tanaka · Chief Abe</p>
+    <h3>FILMED ON LOCATION</h3><p>Wuhu Island &amp; Wedge Island</p>
+    <h3>ISLAND, SKY, SEA, PROPS, PLANES &amp; BOATS</h3><p>Wii Sports Resort © Nintendo (fan project, local use only)</p>
+    <h3>MII RIG</h3><p>datkat21 / mii-creator</p>
+    <h3>WEAPONS &amp; CARS</h3><p>Kenney (CC0)</p>
+    <h3>THANK YOU FOR PLAYING</h3><p>Wuhu is yours. Free roam continues.</p>
+  </div></div>
+
+  <!-- HUD -->
+  <div id="hud" class="hidden">
+    <div id="hud-top-right">
+      <div id="weapon-box"><span id="weapon-icon">👊</span><div><div id="weapon-name">Fists</div><div id="weapon-ammo"></div></div></div>
+      <div id="money">$0</div>
+      <div id="stars"></div>
+      <div id="clock"><span id="clock-time">12:00</span></div>
+    </div>
+    <div id="boss" class="hidden"><div id="boss-name"></div><div class="boss-bar"><div id="boss-fill"></div></div></div>
+    <div id="location-banner"><div id="location-name"></div><div id="location-sub"></div></div>
+    <div id="prompt" class="hidden"></div>
+    <div id="toast"></div>
+    <div id="objective"></div>
+    <div id="subtitle"></div>
+    <div id="mission-timer" class="hidden"></div>
+    <div id="bigtext"><div id="bigtext-main"></div><div id="bigtext-sub"></div></div>
+    <div id="crosshair" class="hidden"></div>
+    <div id="hitmarker"></div>
+    <div id="damage-flash"></div>
+    <div id="wheel" class="hidden"><div id="wheel-center"><b id="wheel-name"></b><span id="wheel-ammo"></span></div></div>
+    <div id="hud-bottom-left">
+      <div id="radar-wrap">
+        <canvas id="minimap" width="300" height="190"></canvas>
+        <div id="minimap-n">N</div>
+      </div>
+      <div id="bars"><div class="bar-h"><div id="health-fill"></div></div><div class="bar-a"><div id="armor-fill"></div></div></div>
+      <div id="speed-row"><span id="mode-icon">🚶</span><span id="speed-val">0</span><small>km/h</small><span id="alt"></span></div>
+      <div id="keys-hint"></div>
+    </div>
+    <div id="fps" class="hidden"></div>
+    <div id="shop" class="hidden"><div class="shop-title">AMMU-WUHU</div><div id="shop-list"></div><div class="shop-foot">W/S or ↑↓ choose · Space buy · walk out or E to leave</div></div>
+    <div id="fp-dot" class="hidden"></div>
+    <div id="bubbles"></div>
+  </div>
+
+  <!-- Big map -->
+  <div id="bigmap" class="screen hidden">
+    <div class="bigmap-card">
+      <div class="bigmap-head"><b>Wuhu Archipelago</b><span>Click a landmark to fast-travel (not during missions or while wanted) · M to close</span></div>
+      <div id="bigmap-inner"><canvas id="bigmap-canvas"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Sports / activity HUD -->
+  <div id="sport-hud" class="hidden">
+    <div class="sh-top"><div id="sh-title"></div><div id="sh-sub"></div></div>
+    <div id="sh-score"></div>
+    <div id="sh-meters"></div>
+    <div id="sh-center"></div>
+    <div id="sh-hint"></div>
+  </div>
+  <!-- Activity select -->
+  <div id="act-panel" class="screen hidden">
+    <div class="act-card">
+      <h2 id="act-title"></h2>
+      <p id="act-desc"></p>
+      <div id="act-modes"></div>
+      <div class="act-row2"><span>Difficulty</span><div id="act-diff"></div></div>
+      <div id="act-controls"></div>
+      <div class="row"><button id="act-cancel" class="btn ghost">Not now</button><button id="act-start" class="btn primary">Start</button></div>
+    </div>
+  </div>
+  <!-- Activity results -->
+  <div id="act-results" class="screen hidden">
+    <div class="act-card results">
+      <h2 id="ar-title"></h2>
+      <div id="ar-result"></div>
+      <div id="ar-score"></div>
+      <div id="ar-best"></div>
+      <div id="ar-detail"></div>
+      <div id="ar-money"></div>
+      <div class="row"><button id="act-retry" class="btn ghost">Retry</button><button id="act-continue" class="btn primary">Continue</button></div>
+    </div>
+  </div>
+  <div id="fade"></div>
+
+  <!-- Pause -->
+  <div id="pause" class="screen hidden">
+    <div class="title-panel narrow">
+      <div class="gtw-logo small"><span class="l1">GRAND</span><span class="l2">THEFT</span><span class="l3">WUHU</span></div>
+      <h2>Paused</h2>
+      <div id="stats"></div>
+      <div id="pause-settings">
+        <div id="settings-host">
+          <div class="settings">
+            <label>Graphics quality
+              <select id="set-quality"><option value="low">Low</option><option value="medium">Medium</option><option value="high" selected>High</option></select></label>
+            <label>Draw distance <input id="set-draw" type="range" min="800" max="4000" step="100" value="2600" /></label>
+            <label>Day length (minutes) <input id="set-day" type="range" min="2" max="60" step="1" value="12" /></label>
+            <label>Music volume <input id="set-music" type="range" min="0" max="1" step="0.05" value="0.45" /></label>
+            <label>Ambient volume <input id="set-amb" type="range" min="0" max="1" step="0.05" value="0.8" /></label>
+            <label>Mouse sensitivity <input id="set-sens" type="range" min="0.2" max="3" step="0.1" value="1" /></label>
+            <label>Pedestrians <input id="set-peds" type="range" min="40" max="320" step="10" value="230" /></label>
+            <label>Traffic cars <input id="set-traffic" type="range" min="0" max="60" step="2" value="36" /></label>
+            <label class="check"><input id="set-invert" type="checkbox" /> Invert mouse Y</label>
+            <label class="check"><input id="set-shadows" type="checkbox" checked /> Shadows</label>
+          </div>
+        </div>
+      </div>
+      <div class="controls">
+        <h3>Controls</h3>
+        <div class="grid">
+          <span>WASD</span><span>Move / drive</span>
+          <span>Shift</span><span>Sprint / boost</span>
+          <span>Space</span><span>Jump · handbrake</span>
+          <span>Right mouse</span><span>Aim (wheel zooms)</span>
+          <span>Left mouse</span><span>Shoot / swing · drive-by with pistols &amp; SMGs</span>
+          <span>1–8 / Q</span><span>Weapon category (press again to cycle) / next weapon</span>
+          <span>Tab (hold)</span><span>Weapon wheel (slows time)</span>
+          <span>R</span><span>Reload</span>
+          <span>E / F</span><span>Enter, exit or carjack a vehicle</span>
+          <span>T</span><span>Talk to a Mii</span>
+          <span>V</span><span>First / third person</span>
+          <span>M</span><span>Map</span>
+          <span>N</span><span>Skip 1 hour</span>
+          <span>H / F3</span><span>Toggle HUD / FPS</span>
+          <span>Plane</span><span>W/S pitch · A/D bank · Shift/Ctrl throttle</span>
+          <span>Cutscenes</span><span>Enter next line · Esc skip</span>
+        </div>
+      </div>
+      <div class="row">
+        <button id="btn-resetm" class="btn ghost">Abandon mission</button>
+        <button id="btn-editmii" class="btn ghost">Quit to main menu</button>
+        <button id="btn-resume" class="btn primary">Resume</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

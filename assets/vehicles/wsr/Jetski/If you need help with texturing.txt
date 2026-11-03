@@ -1,0 +1,17 @@
+Hi! So the texturing with the jetski model is a little strange.
+I've attatched a screenshot of what I did to get the textures to work. i also attached a 
+node layout for mirroring the textue
+
+The screenshot "Node Layout" is for the texture "WS2_vessel_01" and the screenshot 
+"Node Layout (The other 3 textures)" is for "WS2_vessel_01_w", "WS2_vessel_01_y" and "WS2_vessel_01_yg"
+
+I only did mine in blender so if you're using another modelling software im sorry :(
+
+If you have any problems or questions at all DM me on twitter!! @TensForReal
+Enjoy!!!
+
+Node Layout: https://prnt.sc/EuAueBa9cS9s
+
+Node Layout (The other 3 textures): https://prnt.sc/UzTl2kRPws6E
+
+Mirror texture node layout: https://prnt.sc/Nm_phTLh5FPn

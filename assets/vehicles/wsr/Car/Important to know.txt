@@ -1,0 +1,4 @@
+This model has mirrored textures!
+There are 3 different color textures that you can just simply swap out.
+
+oh also! if you're using blender, alpha clip 0.5 looks the best for transparency!!
